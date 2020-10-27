@@ -9,7 +9,7 @@ public class JavaOneTaskOne {
         double doub = 2.5656;
         boolean wh = false;
 
-        thirdTask(8.8f, 1.7f,-2.7f,-1.6f);
+        thirdTask(8.8f, 2.0f,-2.7f,-1.6f);
         System.out.println(fourthTask(5, 8));
         System.out.println(fifthTask(15));
         System.out.println(sixthTask(-43));
