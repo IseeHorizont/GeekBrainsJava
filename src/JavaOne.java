@@ -19,6 +19,10 @@ public class JavaOne {
                 System.out.println("SkyNet побеждён!");
                 break;
             }
+            if (isMapFull()) {
+                System.out.println("Ничья");
+                break;
+            }
             aiTurn();
             printMap();
             if (checkWin(DOT_O)) {
