@@ -1,30 +1,28 @@
 public class JavaOne {
 
     public static void main(String[] args) {
-        Employee[] employeesArray = new Employee[5];
+        Cat firstCat = new Cat("Мурзик", "Рыжий", 3, 300, 2.1);
+        Cat secondCat = new Cat("Пушок", "Белый", 4, 190, 1.9);
+        Dog firstDog = new Dog("Дружок", "Черно-белый", 2,
+                                550, 1.1, 1);
+        Dog secondDog = new Dog("Тузик", "Черный", 6,
+                                240, 0.4, 6);
 
-        employeesArray[0] = new Employee("Thomas Paine", "CEO", "paine@gmail.com",
-                "+1-777-555-222", 160000, 41);
+        System.out.println("---------CAT's actions------------");
+        System.out.println(firstCat.name + " run: " + firstCat.run(100));
+        System.out.println(secondCat.name + " run: " + secondCat.run(200.5));
+        System.out.println(firstCat.name + " jump: " + firstCat.jump(20));
+        System.out.println(firstCat.name + " jump: " + firstCat.jump(1.5));
+        System.out.println(firstCat.name + " swim: " + firstCat.swim(100));
+        System.out.println(secondCat.name + " swim: " + secondCat.swim(10));
 
-        employeesArray[1] = new Employee("Earl Warren", "CTO", "warren@gmail.com",
-                "+1-333-555-111", 90000, 25);
-
-        employeesArray[2] = new Employee("John Dewey", "Financial control officer",
-                "dewey@gmail.com", "+1-111-555-111", 99000, 33);
-
-        employeesArray[3] = new Employee("George Marshall", "Financial control officer",
-                "marshall@gmail.com", "+1-176-565-671", 99000, 40);
-
-        employeesArray[4] = new Employee("Margaret Mead", "Chief creative officer",
-                "creative@gmail.com", "+1-123-595-231", 101000, 43);
-
-        for(int i = 0; i < employeesArray.length; i++){
-            if(employeesArray[i].age > 40){
-                employeesArray[i].printInfoOfEmployee();
-                System.out.println();
-            }
-        }
-
+        System.out.println("---------DOG's actions------------");
+        System.out.println(firstDog.name + " run: " + firstDog.run(480));
+        System.out.println(secondDog.name + " run: " + secondDog.run(505.5));
+        System.out.println(firstDog.name + " jump: " + firstDog.jump(0.2));
+        System.out.println(secondDog.name + " jump: " + secondDog.jump(7));
+        System.out.println(firstDog.name + " swim: " + firstDog.swim(9));
+        System.out.println(secondDog.name + " swim: " + secondDog.swim(0.3));
     }
 
 }
