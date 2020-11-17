@@ -1,32 +1,22 @@
-public class Cat extends Animal{
+public class Cat{
+    private String name;
+    private int appetite;
+    private boolean satiety;
 
-    double limitForRun;
-    double limitForJump;
-
-    Cat(String name, String color, int age, double limitForRun, double limitForJump) {
-        super(name, color, age);
-        this.limitForRun = limitForRun;
-        this.limitForJump = limitForJump;
+    public Cat(String name, int appetite){
+        this.name = name;
+        this.appetite = appetite;
+        this.satiety = false;
     }
 
-    @Override
-    boolean run(double a){
-        if(a > limitForRun){
-            return false;
+    public void eat(Plate plate){
+        if(plate.getFood() > 0){
+            satiety = true;
+            plate.decreaseFood(appetite);
         }
-        return true;
     }
 
-    @Override
-    boolean swim(double a){
-        return false;
-    }
-
-    @Override
-    boolean jump(double a){
-        if(a > limitForJump){
-            return false;
-        }
-        return true;
+    public void isSatiety(){
+        System.out.println("Сытость кошки по кличке " + name + ": " + satiety);
     }
 }

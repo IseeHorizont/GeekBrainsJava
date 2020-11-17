@@ -1,28 +1,35 @@
 public class JavaOne {
+    /**
+     1. Расширить задачу про котов и тарелки с едой
+     2. Сделать так, чтобы в тарелке с едой не могло получиться отрицательного количества еды
+     (например, в миске 10 еды, а кот пытается покушать 15-20)
+     3. Каждому коту нужно добавить поле сытость (когда создаем котов, они голодны).
+     Если коту удалось покушать (хватило еды), сытость = true
+     4. Считаем, что если коту мало еды в тарелке, то он ее просто не трогает,
+     то есть не может быть наполовину сыт (это сделано для упрощения логики программы)
+     5. Создать массив котов и тарелку с едой, попросить всех котов покушать из этой тарелки
+     и потом вывести информацию о сытости котов в консоль
+     6. Добавить в тарелку метод, с помощью которого можно было бы добавлять еду в тарелку
+     */
 
     public static void main(String[] args) {
-        Cat firstCat = new Cat("Мурзик", "Рыжий", 3, 300, 2.1);
-        Cat secondCat = new Cat("Пушок", "Белый", 4, 190, 1.9);
-        Dog firstDog = new Dog("Дружок", "Черно-белый", 2,
-                                550, 1.1, 1);
-        Dog secondDog = new Dog("Тузик", "Черный", 6,
-                                240, 0.4, 6);
+        Plate plate = new Plate(50);
+        Cat[] cats = new Cat[5];
+        cats[0] = new Cat("Мурзик", 20);
+        cats[1] = new Cat("Пушок", 6);
+        cats[2] = new Cat("Васька", 10);
+        cats[3] = new Cat("Маруся", 14);
+        cats[4] = new Cat("Матроскин", 8);
 
-        System.out.println("---------CAT's actions------------");
-        System.out.println(firstCat.name + " run: " + firstCat.run(100));
-        System.out.println(secondCat.name + " run: " + secondCat.run(200.5));
-        System.out.println(firstCat.name + " jump: " + firstCat.jump(20));
-        System.out.println(firstCat.name + " jump: " + firstCat.jump(1.5));
-        System.out.println(firstCat.name + " swim: " + firstCat.swim(100));
-        System.out.println(secondCat.name + " swim: " + secondCat.swim(10));
-
-        System.out.println("---------DOG's actions------------");
-        System.out.println(firstDog.name + " run: " + firstDog.run(480));
-        System.out.println(secondDog.name + " run: " + secondDog.run(505.5));
-        System.out.println(firstDog.name + " jump: " + firstDog.jump(0.2));
-        System.out.println(secondDog.name + " jump: " + secondDog.jump(7));
-        System.out.println(firstDog.name + " swim: " + firstDog.swim(9));
-        System.out.println(secondDog.name + " swim: " + secondDog.swim(0.3));
+        plate.info();
+        for(int i = 0; i < cats.length; i++){
+            cats[i].eat(plate);
+            cats[i].isSatiety();
+            plate.info();
+            if(plate.getFood() == 0){
+                plate.addFood();
+            }
+        }
+        System.out.println("Все кошки сыты!");
     }
-
 }
