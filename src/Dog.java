@@ -13,25 +13,16 @@ public class Dog extends Animal{
 
     @Override
     boolean run(double a){
-        if(a > limitForRun){
-            return false;
-        }
-        return true;
+        return a < limitForRun;
     }
 
     @Override
     boolean swim(double a){
-        if(a > limitForSwim){
-            return false;
-        }
-        return true;
+        return a < limitForSwim;
     }
 
     @Override
     boolean jump(double a){
-        if(a > limitForJump){
-            return false;
-        }
-        return true;
+        return a < limitForJump;
     }
 }
