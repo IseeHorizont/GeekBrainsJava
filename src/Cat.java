@@ -11,10 +11,7 @@ public class Cat extends Animal{
 
     @Override
     boolean run(double a){
-        if(a > limitForRun){
-            return false;
-        }
-        return true;
+        return a < limitForRun;
     }
 
     @Override
@@ -24,9 +21,6 @@ public class Cat extends Animal{
 
     @Override
     boolean jump(double a){
-        if(a > limitForJump){
-            return false;
-        }
-        return true;
+        return a < limitForJump;
     }
 }
