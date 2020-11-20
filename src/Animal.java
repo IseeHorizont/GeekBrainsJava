@@ -2,6 +2,9 @@ public class Animal {
     String name;
     String color;
     int age;
+    double limitForRun;
+    double limitForSwim;
+    double limitForJump;
 
     Animal(String name, String color, int age){
         this.name = name;
@@ -10,14 +13,14 @@ public class Animal {
     }
 
     boolean run(double a){
-        return true;
+        return a < limitForRun;
     }
 
     boolean swim(double a){
-        return true;
+        return a < limitForSwim;
     }
 
     boolean jump(double a){
-        return true;
+        return a < limitForJump;
     }
 }
