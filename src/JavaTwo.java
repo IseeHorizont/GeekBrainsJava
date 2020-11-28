@@ -1,38 +1,50 @@
-import obstacles.*;
-import participants.*;
 
 public class JavaTwo {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws MyArraySizeException, MyArrayDataException{
 
-        Competitor[] competitors = {new Robot("T-1000", "Destroyer", 500, 50),
-                                    new Cat("Мурзик", Color.BLACK),
-                                    new Dog("Бобик", Color.WHITE),
-                                    new Duck("Гага", Color.GREY)
+        Object[][] strArray = { {1, 2, 534, 5345, 77},
+                                {2, 22, 34, 354},
+                                {12, 44, 678, 87},
+                                {22, 34, 678, 435}
         };
-        Obstacle[] obstacles = {new Cross(400), new Wall(5), new Water(10)};
+        try {
+            checkArrayOfString(strArray);
+        }
+        catch(MyArraySizeException ex){
 
-        Team team = new Team("Новые стражи галактики", competitors);
+        }
+        catch(MyArrayDataException ex){
 
-        System.out.println(team.getTeamName());
-        System.out.println();
+        }
 
-        System.out.println("Участники команды:");
-        team.showResults();
-        System.out.println();
+    }
 
-        Course course = new Course(obstacles);
-
-        System.out.println("Старт соревнований:");
-        course.doIt(team);
-        System.out.println();
-
-        System.out.println("Результаты соревнования:");
-        team.showResults();
-        System.out.println();
-
-        System.out.println("Участники команды, успешно завершившие соревнование:");
-        team.showMembersFinishedCourse();
-
+    public static void checkArrayOfString(Object[][] arr) throws MyArraySizeException, MyArrayDataException{
+        if(arr.length > 4){
+            throw new MyArraySizeException("Превышено количество строк в массиве");
+        }
+        for (int i = 0; i < arr.length; i++) {
+            if(arr[i].length > 4){
+                throw new MyArraySizeException("Превышен размер столбца " + (i+1));
+            }
+        }
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr.length; j++) {
+                try {
+                    arr[i][j] = (int) arr[i][j];
+                }
+                catch(ClassCastException ex){
+                    throw new MyArrayDataException("Ошибка приведения к int в строке " + (i+1)
+                                                                + " столбца " + (j+1));
+                }
+            }
+        }
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr.length; j++) {
+                System.out.println(arr[i][j] + " ");
+            }
+            System.out.println();
+        }
     }
 }
