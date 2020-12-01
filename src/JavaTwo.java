@@ -1,5 +1,4 @@
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class JavaTwo {
 
@@ -8,8 +7,8 @@ public class JavaTwo {
         //task 1
 
         String[] words = {
-                "Ocean", "Sea", "Apple", "Second", "Giraffe", "Cow", "Dog", "Cat", "Horse", "Sword",
-                "Steal", "Sound", "Grape", "Apple", "Sea", "Summer", "Monday", "Sunday", "House", "House",
+                "Ocean", "Sea", "Apple", "Second", "Sea", "Cow", "Dog", "Cat", "Horse", "Sword",
+                "Steal", "Sea", "Grape", "Apple", "Sea", "Summer", "Monday", "Sunday", "House", "House",
         };
         Set<String> listOfWords = new HashSet<>(words.length);
         for (int i = 0; i < words.length; i++){
@@ -22,6 +21,23 @@ public class JavaTwo {
             count++;
         }
 
+        System.out.println("Количество повторяющихся слов в массиве:");
+        Map<String, Integer> wordsMap = new HashMap<>();
+        for (int i = 0; i < words.length; i++) {
+            if(wordsMap.containsKey(words[i])) {
+                int cou  = wordsMap.get(words[i]);
+                wordsMap.put(words[i], ++cou);
+            }else {
+                wordsMap.put(words[i], 0);
+            }
+        }
+        for (Map.Entry i : wordsMap.entrySet()) {
+            if((int)(i.getValue()) > 0) {
+                System.out.println(i.getKey() + " - " + ((int)(i.getValue())+1));
+            }
+        }
+
+
         //task 2
 
         ListOfPhoneNumbers list = new ListOfPhoneNumbers();
@@ -32,7 +48,6 @@ public class JavaTwo {
         list.print();
 
         list.get("Иванов");
+
     }
-
-
 }
