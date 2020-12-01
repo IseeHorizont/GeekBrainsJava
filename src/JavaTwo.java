@@ -1,50 +1,38 @@
+import java.util.HashSet;
+import java.util.Set;
 
 public class JavaTwo {
 
-    public static void main(String[] args) throws MyArraySizeException, MyArrayDataException{
+    public static void main(String[] args){
 
-        Object[][] strArray = { {1, 2, 534, 5345, 77},
-                                {2, 22, 34, 354},
-                                {12, 44, 678, 87},
-                                {22, 34, 678, 435}
+        //task 1
+
+        String[] words = {
+                "Ocean", "Sea", "Apple", "Second", "Giraffe", "Cow", "Dog", "Cat", "Horse", "Sword",
+                "Steal", "Sound", "Grape", "Apple", "Sea", "Summer", "Monday", "Sunday", "House", "House",
         };
-        try {
-            checkArrayOfString(strArray);
+        Set<String> listOfWords = new HashSet<>(words.length);
+        for (int i = 0; i < words.length; i++){
+            listOfWords.add(words[i]);
         }
-        catch(MyArraySizeException ex){
-
+        int count = 1;
+        System.out.println("Массив уникальных слов:");
+        for (String item : listOfWords) {
+            System.out.println(count + ") " + item);
+            count++;
         }
-        catch(MyArrayDataException ex){
 
-        }
+        //task 2
 
+        ListOfPhoneNumbers list = new ListOfPhoneNumbers();
+        list.add("Иванов", "8-969-444-0000");
+        list.add("Иванов", "8-969-444-1111");
+        list.add("Сергеев", "4-555-444-9876");
+        list.add("Петров", "2-000-444-1234");
+        list.print();
+
+        list.get("Иванов");
     }
 
-    public static void checkArrayOfString(Object[][] arr) throws MyArraySizeException, MyArrayDataException{
-        if(arr.length > 4){
-            throw new MyArraySizeException("Превышено количество строк в массиве");
-        }
-        for (int i = 0; i < arr.length; i++) {
-            if(arr[i].length > 4){
-                throw new MyArraySizeException("Превышен размер столбца " + (i+1));
-            }
-        }
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < arr.length; j++) {
-                try {
-                    arr[i][j] = (int) arr[i][j];
-                }
-                catch(ClassCastException ex){
-                    throw new MyArrayDataException("Ошибка приведения к int в строке " + (i+1)
-                                                                + " столбца " + (j+1));
-                }
-            }
-        }
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < arr.length; j++) {
-                System.out.println(arr[i][j] + " ");
-            }
-            System.out.println();
-        }
-    }
+
 }
