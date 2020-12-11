@@ -3,52 +3,55 @@ public class JavaTwo {
     public static final int size = 10000000;
     public static final int h = size / 2;
 
+    public static float[] arr1 = new float[size];
+    public static float[] arr2 = new float[size];
+
     public static void simpleMethodMakeArrayAndCalculatingInIt(){
 
-        float[] arr = new float[size];
+        //float[] arr1 = new float[size];
 
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = 1;
+        for (int i = 0; i < arr1.length; i++) {
+            arr1[i] = 1;
         }
         long startTime = System.currentTimeMillis();
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = (float)(arr[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
+        for (int i = 0; i < arr1.length; i++) {
+            arr1[i] = (float)(arr1[i] * Math.sin(0.2f + i / 5) * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
         }
         System.out.println("Время выполнения операций вычисления в массиве в одном потоке: "
                                                 + (System.currentTimeMillis() - startTime));
     }
 
     public static void multiThreadsMethodMakeArrayAndCalculatingInIt(){
-        float[] arr = new float[size];
+        //float[] arr2 = new float[size];
+        final float[] leftSide = new float[h];
+        final float[] rightSide = new float[h];
 
         for (int i = 0; i < size; i++) {
-            arr[i] = 1;
+            arr2[i] = 1;
         }
         long time = System.currentTimeMillis();
+        System.arraycopy(arr2, 0, leftSide, 0, h);
+        System.arraycopy(arr2, h, rightSide, 0, h);
 
-        Thread leftHalf = new Thread(new Runnable() {
+        final Thread leftHalf = new Thread(new Runnable() {
             @Override
             public void run() {
-                float[] leftSide = new float[h];
-                System.arraycopy(arr, 0, leftSide, 0, h);
-                for (int i = 0; i < leftSide.length; i++) {
+                for (int i = 0; i < h; i++) {
                     leftSide[i] = (float)(leftSide[i] * Math.sin(0.2f + i / 5)
                                     * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
                 }
-                System.arraycopy(leftSide, 0, arr, 0, h);
             }
         });
 
-        Thread rightHalf = new Thread(new Runnable() {
+        final Thread rightHalf = new Thread(new Runnable() {
             @Override
             public void run() {
-                float[] rightSide = new float[h];
-                System.arraycopy(arr, h, rightSide, 0, h);
-                for (int i = 0; i < rightSide.length; i++) {
-                    rightSide[i] = (float)(rightSide[i] * Math.sin(0.2f + i / 5)
-                                    * Math.cos(0.2f + i / 5) * Math.cos(0.4f + i / 2));
+                int strafe = h;
+                for (int i = 0; i < h; i++) {
+                    rightSide[i] = (float)(rightSide[i] * Math.sin(0.2f + (i+strafe) / 5)
+                                    * Math.cos(0.2f + (i+strafe) / 5) * Math.cos(0.4f + (i+strafe) / 2));
                 }
-                System.arraycopy(rightSide, 0, arr, h, h);
+
             }
         });
 
@@ -61,17 +64,29 @@ public class JavaTwo {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        System.arraycopy(leftSide, 0, arr2, 0, h);
+        System.arraycopy(rightSide, 0, arr2, h, h);
 
         System.out.println("Время выполнения операций в массиве в два потока: "
                                         + (System.currentTimeMillis() - time));
     }
 
+    public static boolean compareArrays(float[] arr1, float[] arr2){
+        boolean compareRes = true;
+        for (int i = 0; i < size; i++) {
+            if(arr1[i] != arr2[i]){
+                compareRes = false;
+            }
+        }
+        return compareRes;
+    }
+
     public static void main(String[] args) {
         simpleMethodMakeArrayAndCalculatingInIt();
 
-        System.out.println();
-
         multiThreadsMethodMakeArrayAndCalculatingInIt();
+
+        System.out.println(compareArrays(arr1, arr2));
 
     }
 }
